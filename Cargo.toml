@@ -1,5 +1,5 @@
 [package]
-name = "SAGbackend"
+name = "sagbackend"
 version = "0.1.0"
 authors = ["Simon Schmitt <sls@sls.wtf>"]
 edition = "2018"
@@ -8,3 +8,10 @@ edition = "2018"
 
 [dependencies]
 rocket = "0.4.6"
+diesel = { version = "1.4.4", features = ["postgres"] }
+dotenv = "0.15.0"
+
+[dependencies.rocket_contrib]
+version = "0.4.7"
+default-features = false
+features = ["json"]
