@@ -1,8 +1,8 @@
 table! {
-    users (id) {
+    posts (id) {
         id -> Int4,
-        name -> Varchar,
-        email -> Varchar,
-        password -> Varchar,
+        title -> Varchar,
+        body -> Text,
+        published -> Bool,
     }
 }
