@@ -1,57 +1,21 @@
 
-#![feature(proc_macro_hygiene, decl_macro)]
-
-#[macro_use]
-extern crate rocket;
-
-#[macro_use]
-extern crate diesel;
+#![feature(decl_macro, proc_macro_hygiene)]
+#[macro_use] extern crate rocket;
+#[macro_use] extern crate diesel;
 extern crate dotenv;
+extern crate r2d2;
+extern crate r2d2_diesel;
+extern crate rocket_contrib;
+#[macro_use]
+extern crate serde_derive;
 
-
-use diesel::pg::PgConnection;
-use diesel::Connection;
 use dotenv::dotenv;
-use std::env;
-use rocket_contrib::templates::Template;
 
-pub mod posts;
-
-pub mod models;
-
-pub mod schema;
-
-pub fn establish_connection() -> PgConnection {
-    dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL")
-        .expect("DATABASE_URL must be set");
-    PgConnection::establish(&database_url)
-        .expect(&format!("Error connecting to {}", database_url))
-}
-
-#[get("/posts/<id>")]
-fn blogview(id: i32) -> &'static str {
-    "What {}", id
-}
-
-#[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
+mod posts;
+mod schema;
+mod connection;
 
 fn main() {
-    rocket::ignite()
-        .mount("/", routes![
-            index,
-            blogview,
-            posts::list,
-            posts::new,
-            posts::insert,
-            posts::update,
-            posts::delete,
-            posts::process_update
-            ])
-        .attach(Template::fairing())
-        .launch();
+    dotenv().ok();
+    posts::router::create_routes();
 }
