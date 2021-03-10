@@ -8,4 +8,7 @@ RUN cargo build
 
 EXPOSE 3000
 
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD [ "cargo", "run" ]
