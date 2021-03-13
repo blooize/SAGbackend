@@ -7,8 +7,6 @@ COPY . /usr/src/sagbackend
 RUN cargo build
 
 EXPOSE 3000
+EXPOSE 5432
 
-COPY docker-entrypoint.sh /
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD [ "cargo", "run" ]

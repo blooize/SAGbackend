@@ -1,8 +1,16 @@
 -- Your SQL goes here
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
   title VARCHAR NOT NULL,
   body TEXT NOT NULL,
   summary TEXT NOT NULL,
   published BOOLEAN NOT NULL DEFAULT 'f'
+);
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  email VARCHAR NOT NULL,
+  password VARCHAR NOT NULL
 )
