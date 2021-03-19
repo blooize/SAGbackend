@@ -1,4 +1,3 @@
-    
 use crate::connection::DbConn;
 use diesel::result::Error;
 use std::env;
